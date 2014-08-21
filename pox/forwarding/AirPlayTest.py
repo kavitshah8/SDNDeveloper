@@ -172,15 +172,17 @@ class LearningSwitch (object):
     entry.add()
     log.debug ("\n packet_src_mac = %s \n packet_dst_mac = %s \n Elements inside a table = %s \n", packet_src_mac, packet_dst_mac, len(table)) 
     
-    # Algorithm for Air_Play
-    # 1) Is packet a multicast packet ?
-    # 2) Is packet an IPv4 packet ?
-    # 3) Is packet a multicast DNS packet ?
-    # 4) Iterate over pairdb table for client_mac, host_mac:
-    # 5) if packet.src == client_mac or dst_mac == packet.src :
-    # 6) Iterate over global table and send packet to apt. switch using its DPID
-    # 7) If src_mac of the device is in global table send packet to switch to whom device is connected using its DPID 
-
+    """
+    Algorithm for Air_Play
+    1) Is packet a multicast packet ?
+    2) Is packet an IPv4 packet ?
+    3) Is packet a multicast DNS packet ?
+    4) Iterate over pairdb table for client_mac, host_mac:
+    5) if packet.src == client_mac or dst_mac == packet.src :
+    6) Iterate over global table and send packet to apt. switch using its DPID
+    7) If src_mac of the device is in global table send packet to switch to whom device is connected using its DPID 
+    """
+    
     if packet.dst.isMulticast(): # 1)
       log.debug("\n 1) Found Multicast Packet \n")
       
