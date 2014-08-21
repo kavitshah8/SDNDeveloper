@@ -15,8 +15,6 @@ log = core.getLogger()
 # Can be overriden on commandline.
 _flood_delay = 0
 
-#############################################################################################
-#############################################################################################
 # Global learning table & pairdb table for AirPlay project
 table = set([])
 mac_list = ["98:D6:BB:2B:57:F2","00:16:CB:8A:A8:7E"]
@@ -40,8 +38,6 @@ class GlobeLearningTable(object):
     global table
     if self not in table:
       table.add(self)
-#############################################################################################
-#############################################################################################
 
 class LearningSwitch (object):
   """
@@ -163,8 +159,6 @@ class LearningSwitch (object):
     # creating l2 table for individual switch & global learning table 
     self.macToPort[packet.src] = event.port # 1
     
-    ##################################################################################################################################
-    ##################################################################################################################################
     # Constants for AirPlayProject
     dpid = event.dpid
     
@@ -173,23 +167,20 @@ class LearningSwitch (object):
     
     packet_dst = str(packet.dst)
     packet_dst_mac = packet_dst.upper()
-    log.debug("\n###########################\n   DEBUGGING BEGINS HERE   \n###########################\n")
-   
+
     entry = GlobeLearningTable(packet_src_mac, packet_dst_mac, event.port, dpid)
     entry.add()
     log.debug ("\n packet_src_mac = %s \n packet_dst_mac = %s \n Elements inside a table = %s \n", packet_src_mac, packet_dst_mac, len(table)) 
     
     # Algorithm for Air_Play
     # 1) Is packet a multicast packet ?
-      # 2) Is packet an IPv4 packet ?
-        # 3) Is packet a multicast DNS packet ?
-           # 4) Iterate over pairdb table for client_mac, host_mac:
-              # 5) if packet.src == client_mac or dst_mac == packet.src :
-                 # 6) Iterate over global table and send packet to apt. switch using its DPID
-                    # 7) If src_mac of the device is in global table send packet to switch to whom device is connected using its DPID 
+    # 2) Is packet an IPv4 packet ?
+    # 3) Is packet a multicast DNS packet ?
+    # 4) Iterate over pairdb table for client_mac, host_mac:
+    # 5) if packet.src == client_mac or dst_mac == packet.src :
+    # 6) Iterate over global table and send packet to apt. switch using its DPID
+    # 7) If src_mac of the device is in global table send packet to switch to whom device is connected using its DPID 
 
-
-      
     if packet.dst.isMulticast(): # 1)
       log.debug("\n 1) Found Multicast Packet \n")
       
@@ -219,9 +210,6 @@ class LearningSwitch (object):
                 # if obj.src_mac == mac : # 7)
                 # log.debug("\n 7) Finally in the last branch \n")
                       
-    ###############################################################################################################################################################
-    ###############################################################################################################################################################
-
     else:
       if packet.dst not in self.macToPort: # 4
         log.debug("Port for %s unknown -- flooding" % (packet.dst,)) 
