@@ -238,9 +238,9 @@ class LearningSwitch (object):
   
 
 class l2_learning (object):
-  """
-  Waits for OpenFlow switches to connect and makes them learning switches.
-  """
+  
+  # Waits for OpenFlow switches to connect and makes them learning switches.
+  
   def __init__ (self, transparent):
     core.openflow.addListeners(self)
     self.transparent = transparent
@@ -252,9 +252,9 @@ class l2_learning (object):
 
 
 def launch (transparent=False, hold_down=_flood_delay):
-  """
-  Starts an L2 learning switch.
-  """
+
+  # Starts an L2 learning switch.
+
   try:
     global _flood_delay
     _flood_delay = int(str(hold_down), 10)
